@@ -14,7 +14,7 @@
 .ruet-header{
   background:
     linear-gradient(rgba(15,42,82,0.92), rgba(15,42,82,0.92)),
-    url("img/_asset/skyline.png") center bottom / cover no-repeat;
+    url("img/_asset/skyline.png") center center / cover no-repeat;
 
   border-radius: 18px;
   padding: 26px 22px;
@@ -23,21 +23,51 @@
   color: #ffffff;
 }
 
+/* === HARD OVERRIDE: keep logo + text as one centered group === */
 .ruet-inner{
-  display: flex;
-  align-items: center;
-  gap: 18px;
+  display: flex !important;
+  justify-content: center !important; /* center the whole group */
 }
 
+.ruet-inner{
+  gap: 0 !important; /* we'll control spacing ourselves */
+}
+
+/* group wrapper (we create it without HTML change) */
 .ruet-logo{
-  width: 90px;
-  height: auto;
+  margin: 0 !important;
 }
 
+/* Make ruet-logo + ruet-text behave like a centered unit */
+.ruet-logo,
 .ruet-text{
-  text-align: center;
-  flex: 1;
+  display: inline-block;
+  vertical-align: middle;
 }
+
+/* Move logo closer to the text */
+.ruet-logo{
+  width: 100px;
+  margin-right: 14px !important; /* spacing between logo and text */
+}
+
+/* IMPORTANT: stop text from being pushed by flex */
+.ruet-text{
+  flex: 0 0 auto !important;     /* don't stretch */
+  text-align: center !important;
+}
+
+/* On mobile: stack */
+@media (max-width: 640px){
+  .ruet-inner{
+    flex-direction: column !important;
+  }
+  .ruet-logo{
+    margin-right: 0 !important;
+  }
+}
+
+
 
 .ruet-motto{
   font-size: 13px;
